@@ -1,12 +1,34 @@
-# JB125 Java EE 7 Hello World web App
+# Java EE 7 Hello World Web App
 
-## Architecture:
+A Java EE 7 web application demonstrating JSF, JAX-RS, JPA, CDI, and EJB technologies.
 
-* Maven Project - builds a WAR
-* Using JSF 2.2 for web interface, HTML5 facelets page, JSF backing beans, CDI scopes on beans, @Named
-* Statelss EJB for services - uses JPA entity beans - exposes appropriate method as REST API using JAX-RS annotations
-* JAX-RS Application class
-* JPA entity bean to store names - uses H2 in-memory database
-* Use EJB Singleton to lookup messaging connection and queue destination and inject into stateless EJB - lookup should only occur once on startup
-* Servlet that returns "OK" - this is a health check - path should be [context]/health
-* H2 (embedded in-memory DB) backend
+## Features
+- **Web UI**: JSF 2.2 with facelets and CDI beans
+- **REST API**: JAX-RS endpoints for Person CRUD operations
+- **Database**: JPA with H2 in-memory database
+- **Health Check**: `/health` endpoint for monitoring
+- **Validation**: Bean validation with constraints
+
+## Quick Start
+
+1. **Build**: `mvn clean package`
+2. **Deploy**: Deploy `hello-web.war` to JBoss EAP/WildFly
+3. **Access**: 
+   - Web: `http://localhost:8080/hello-web/`
+   - API: `http://localhost:8080/hello-web/rest/persons`
+   - Health: `http://localhost:8080/hello-web/health`
+
+## API Examples
+
+```bash
+# Get all persons
+curl http://localhost:8080/hello-web/rest/persons
+
+# Create person
+curl -X POST http://localhost:8080/hello-web/rest/persons \
+  -H "Content-Type: application/json" \
+  -d '{"name": "John Doe"}'
+```
+
+## Tech Stack
+- Java EE 7, Maven, JSF 2.2, JAX-RS, JPA 2.1, CDI, EJB 3.2, H2 Database
